@@ -6,7 +6,7 @@ import Categories from "./components/Categories";
 function App() {
 
   const apiUrl = "https://api.predic8.de";
-
+  
   return (
     <div className="App">
       <AllProducts url={apiUrl} />
