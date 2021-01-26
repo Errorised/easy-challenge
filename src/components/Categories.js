@@ -4,6 +4,7 @@ import Appbar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import TabContent from "./TabContent";
+import TabAllProducts from "./TabAllProducts";
 
 const Categories = (props) => {
   const [allCategories, setAllCategories] = useState([]);
@@ -58,6 +59,7 @@ const Categories = (props) => {
               return <Tab label={category.name}></Tab>;
             })}
           </Tabs>
+          <TabAllProducts data={allCategories}/>
           <TabContent value={tabValue} data={allCategories} index={0} />
           <TabContent value={tabValue} data={allCategories} index={1} />
           <TabContent value={tabValue} data={allCategories} index={2} />
