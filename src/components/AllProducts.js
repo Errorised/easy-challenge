@@ -23,7 +23,6 @@ const AllProducts = (props) => {
 
         axios.all(getPrice).then(res => setProducts(res));      
     }
-    console.log(products);
     useEffect(() => {
         getProducts();
 
@@ -42,7 +41,7 @@ const AllProducts = (props) => {
           {products.map((product, index) => {
             return (
               <tr>
-                <th><img className="image" src={props.url + product.photo_url} alt="no img"></img></th>
+                <th><img className="image" src={props.url + product.photo_url} alt="no image"></img></th>
                 <th>{product.name} </th>
                 <th>{product.price} </th>
               </tr>

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import "./App.css";
 import AllProducts from "./components/AllProducts"
+import Categories from "./components/Categories";
 
 function App() {
 
@@ -10,6 +10,7 @@ function App() {
   return (
     <div className="App">
       <AllProducts url={apiUrl} />
+      <Categories url={apiUrl} />
     </div>
   );
 }
