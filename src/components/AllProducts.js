@@ -1,16 +1,16 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
 
-const AllProducts = () => {
+const AllProducts = (props) => {
     const [products, setProducts] = useState([]);
 
     const getProducts = async () => {
 
-        const res = await axios.get(apiUrl + "/shop/products/");
+        const res = await axios.get(props.url + "/shop/products/");
         const allProducts = res.data.products;
 
         const getPriceUrl = await allProducts.map((product) => {
-            return (apiUrl + product.product_url)
+            return (props.url + product.product_url)
         })
 
         const getPrice = await getPriceUrl.map((url) => {
@@ -21,18 +21,36 @@ const AllProducts = () => {
                 .catch(err => console.log(err));
         })
 
-        axios.all(getPrice).then(res => setProducts(res));
-
-        console.log(products);
-        useEffect(() => {
-            getProducts();
-
-        }, []);
+        axios.all(getPrice).then(res => setProducts(res));      
     }
+    console.log(products);
+    useEffect(() => {
+        getProducts();
+
+    }, []);
     return (
         <div>
-            
-        </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Product</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {products.map((product, index) => {
+            return (
+              <tr>
+                <th><img className="image" src={props.url + product.photo_url} alt="no img"></img></th>
+                <th>{product.name} </th>
+                <th>{product.price} </th>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+    </div>
     )
 }
 
