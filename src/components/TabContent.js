@@ -11,19 +11,24 @@ const TabContent = (props) => {
 
   const products = data[value].products;
   //Filter results (capitalize, removing most invalid elements)
-  const capitalized = products.map(element => _.startCase(_.toLower(element.name)));
-  const filtered = _
-  .chain(capitalized)
-  .union(capitalized)
-  .filter(element => element.length > 3 && !element.includes("Produkt"))
-  .value()
+  const capitalized = products.map((element) =>
+    _.startCase(_.toLower(element.name))
+  );
+  const filtered = _.chain(capitalized)
+    .union(capitalized)
+    .filter(
+      (element) =>
+        element.length > 3 &&
+        element.length < 18 &&
+        !element.includes("Produkt")
+    )
+    .value();
 
-//   console.log(filtered);
+  console.log(capitalized);
 
   return (
     <TabPanel value={props.value} index={props.index}>
       {filtered.map((element) => {
-        
         return <p>{element}</p>;
       })}
     </TabPanel>

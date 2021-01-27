@@ -9,7 +9,7 @@ import TabAllProducts from "./TabAllProducts";
 const Categories = (props) => {
   const [allCategories, setAllCategories] = useState([]);
   //waiting for fetching data
-  const [isLoading, setLoading] = useState(true); 
+  const [isLoading, setLoading] = useState(true);
   //getting categories from API
   const getCategories = async () => {
     const res = await axios.get("https://api.predic8.de/shop/categories/");
@@ -53,15 +53,19 @@ const Categories = (props) => {
       ) : (
         <Appbar position="static">
           <Tabs onChange={handleTabs} value={tabValue}>
+            
             {allCategories.map((category) => {
               return <Tab label={category.name}></Tab>;
             })}
+            <Tab label="All Products" />
           </Tabs>
-          <TabAllProducts data={allCategories}/>
           <TabContent value={tabValue} data={allCategories} index={0} />
           <TabContent value={tabValue} data={allCategories} index={1} />
           <TabContent value={tabValue} data={allCategories} index={2} />
           <TabContent value={tabValue} data={allCategories} index={3} />
+          <TabContent value={tabValue} data={allCategories} index={4} />
+          <TabContent value={tabValue} data={allCategories} index={5} />
+          <TabAllProducts value={tabValue} data={allCategories} index={6} />
         </Appbar>
       )}
     </div>
