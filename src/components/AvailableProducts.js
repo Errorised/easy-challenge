@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 
-const AllProducts = (props) => {
+const AvailableProducts = (props) => {
     const [products, setProducts] = useState([]);
 
     const getProducts = async () => {
@@ -53,4 +53,4 @@ const AllProducts = (props) => {
     )
 }
 
-export default AllProducts;
+export default AvailableProducts;

@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import AllProducts from "./components/AllProducts"
+import AvailableProducts from "./components/AvailableProducts"
 import Categories from "./components/Categories";
 
 function App() {
@@ -9,7 +9,9 @@ function App() {
   
   return (
     <div className="App">
-      <AllProducts url={apiUrl} />
+      <h1>List of available products</h1>
+      <AvailableProducts url={apiUrl} />
+      <h1>List of all products</h1>
       <Categories url={apiUrl} />
     </div>
   );

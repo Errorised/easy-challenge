@@ -8,19 +8,21 @@ import TabAllProducts from "./TabAllProducts";
 
 const Categories = (props) => {
   const [allCategories, setAllCategories] = useState([]);
-  const [isLoading, setLoading] = useState(true);
-
+  //waiting for fetching data
+  const [isLoading, setLoading] = useState(true); 
+  //getting categories from API
   const getCategories = async () => {
     const res = await axios.get("https://api.predic8.de/shop/categories/");
     const categories = res.data.categories;
+    //removing every element w/o name or number as name
     const filtered = await categories.filter((element) => {
       return element.hasOwnProperty("name") && isNaN(element.name);
     });
-
+    //creating array of product urls
     const categorieUrl = filtered.map((element) => {
       return props.url + element.category_url;
     });
-
+    //promise for every url
     const getproductsByCategorie = await categorieUrl.map((url) => {
       return axios
         .get(url)
@@ -28,21 +30,17 @@ const Categories = (props) => {
         .catch((err) => console.log(err));
     });
 
+    //set allCategories in Array of Objects: [...{name: "", products: []}]
     await axios
       .all(getproductsByCategorie)
       .then((res) => setAllCategories(res));
-
     setLoading(false);
   };
 
   useEffect(() => {
     getCategories();
   }, []);
-
-  //   const getFruits = allCategories[0].products.map (fruit => {
-  //       return fruit.name
-  //   })
-
+  //handle Tabs
   const [tabValue, setTabValue] = useState(0);
   const handleTabs = (event, newValue) => {
     setTabValue(newValue);

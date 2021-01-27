@@ -10,11 +10,12 @@ const TabContent = (props) => {
   };
 
   const products = data[value].products;
+  //Filter results (capitalize, removing most invalid elements)
   const capitalized = products.map(element => _.startCase(_.toLower(element.name)));
   const filtered = _
   .chain(capitalized)
   .union(capitalized)
-  .filter(element => element.length > 4 && !element.includes("Produkt"))
+  .filter(element => element.length > 3 && !element.includes("Produkt"))
   .value()
 
 //   console.log(filtered);
@@ -30,3 +31,5 @@ const TabContent = (props) => {
 };
 
 export default TabContent;
+
+//CAN BE OPTIMIZED
