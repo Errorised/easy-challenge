@@ -1,5 +1,6 @@
 import React from "react";
 import _ from "lodash";
+import classes from "./AvailableProductsTable.module.css"
 
 const AvailableProductsTable = (props) => {
   const { searchTerm, products, url } = props;
@@ -14,10 +15,9 @@ const AvailableProductsTable = (props) => {
   });
   //filter duplicates
   const filtered = _.uniqBy(capitalized, (element) => element.name)
-  console.log(products)
 
   return (
-    <table>
+    <table className={classes.contentTable}> 
       <thead>
         <tr>
           <th>Image</th>
@@ -47,7 +47,7 @@ const AvailableProductsTable = (props) => {
                   ></img>
                 </th>
                 <th>{product.name} </th>
-                <th>{product.price} </th>
+                <th>{product.price.toFixed(2) + " €"} </th>
               </tr>
             );
           })}

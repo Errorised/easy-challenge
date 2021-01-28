@@ -1,0 +1,32 @@
+.contentTable {
+  border-collapse: collapse;
+  margin: 20px auto;
+  min-width: 400px;
+  width: 50%;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+
+.contentTable th,
+.contentTable tr {
+    padding: 12px 15px;
+}
+
+thead tr {
+  color: #ffffff;
+  background-color: #009879;
+  font-size: 1.5rem;
+  text-align: left;
+}
+
+tbody tr {
+  text-align: left;
+  font-size: 1.1rem;
+  border-bottom: 1px solid #dddddd;
+}
+
+tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}

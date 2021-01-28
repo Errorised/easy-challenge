@@ -5,6 +5,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import TabContent from "./TabContent";
 import TabAllProducts from "./TabAllProducts";
+import { makeStyles } from "@material-ui/core/styles";
 
 const CategoriesTable = (props) => {
   const [allCategories, setAllCategories] = useState([]);
@@ -46,26 +47,45 @@ const CategoriesTable = (props) => {
     setTabValue(newValue);
   };
 
+  const useStyles = makeStyles((theme) => ({
+    demo2: {
+      backgroundColor: "#2e1534",
+      width: "60%",
+      margin: "auto"
+    },
+    table: {
+      width: "60%"
+    }
+  }));
+  const classes = useStyles();
+
   return (
     <div>
       {isLoading ? (
         <h1>Loding</h1>
       ) : (
         <Appbar position="static">
-          <Tabs onChange={handleTabs} value={tabValue}>
-            {allCategories.map((category, index) => {
-              return <Tab label={category.name} key={index} ></Tab>;
-            })}
-            <Tab label="All Products" />
-          </Tabs>
-          <TabContent value={tabValue} data={allCategories} index={0} />
-          <TabContent value={tabValue} data={allCategories} index={1} />
-          <TabContent value={tabValue} data={allCategories} index={2} />
-          <TabContent value={tabValue} data={allCategories} index={3} />
-          <TabContent value={tabValue} data={allCategories} index={4} />
-          <TabContent value={tabValue} data={allCategories} index={5} />
-          <TabAllProducts value={tabValue} data={allCategories} index={6} />
-        </Appbar>
+          <div className={classes.demo2}>
+            <Tabs
+              onChange={handleTabs}
+              value={tabValue}
+              variant="scrollable"
+            >
+              {allCategories.map((category, index) => {
+                return <Tab label={category.name} key={index}></Tab>;
+              })}
+              <Tab label="All Products" />
+            </Tabs>
+            <TabContent value={tabValue} data={allCategories} index={0} />
+            <TabContent value={tabValue} data={allCategories} index={1} />
+            <TabContent value={tabValue} data={allCategories} index={2} />
+            <TabContent value={tabValue} data={allCategories} index={3} />
+            <TabContent value={tabValue} data={allCategories} index={4} />
+            <TabContent value={tabValue} data={allCategories} index={5} />
+            <TabAllProducts value={tabValue} data={allCategories} index={6} />
+            </div>
+          </Appbar>
+
       )}
     </div>
   );

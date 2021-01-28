@@ -1,5 +1,6 @@
 import React from "react";
 import _ from "lodash";
+import classes from "./TabContent.module.css";
 
 const TabContent = (props) => {
   const data = props.data;
@@ -25,9 +26,11 @@ const TabContent = (props) => {
     .value();
   return (
     <TabPanel value={props.value} index={props.index}>
-      {filtered.map((element, index) => {
-        return <p key={index}>{element}</p>;
-      })}
+      <div className={classes.tabContent} >
+        {filtered.map((element, index) => {
+          return <p key={index}>{element}</p>;
+        })}
+      </div>
     </TabPanel>
   );
 };

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SearchBar from "./SearchBar";
 import AvailableProductsTable from "./AvailableProductsTable";
+import classes from "./AvailableProducts.module.css"
 
 const AvailableProducts = (props) => {
   const [products, setProducts] = useState([]);
@@ -34,7 +35,7 @@ const AvailableProducts = (props) => {
   }, []);
 
   return (
-    <div>
+    <div className={classes.table} >
       <SearchBar
         products={products}
         onSearch={handleSearch}

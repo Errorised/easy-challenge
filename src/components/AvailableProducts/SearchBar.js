@@ -1,10 +1,9 @@
 import React from "react";
+import classes from "./SearchBar.module.css"
 
 const SearchBar = (props) => {
   return (
-    <div>
-      <input type="text" placeholder="Search..." onChange={props.onSearch} />
-    </div>
+    <input className={classes.searchBar} type="text" placeholder="Search..." onChange={props.onSearch} />
   );
 };
 
