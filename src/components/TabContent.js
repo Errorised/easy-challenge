@@ -23,13 +23,10 @@ const TabContent = (props) => {
         !element.includes("Produkt")
     )
     .value();
-
-  console.log(capitalized);
-
   return (
     <TabPanel value={props.value} index={props.index}>
-      {filtered.map((element) => {
-        return <p>{element}</p>;
+      {filtered.map((element, index) => {
+        return <p key={index}>{element}</p>;
       })}
     </TabPanel>
   );

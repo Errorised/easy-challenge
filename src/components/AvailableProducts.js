@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
+import SearchBar from "./SearchBar";
 
 const AvailableProducts = (props) => {
     const [products, setProducts] = useState([]);
@@ -27,8 +28,10 @@ const AvailableProducts = (props) => {
         getProducts();
 
     }, []);
+
     return (
         <div>
+          <SearchBar products={products} />
       <table>
         <thead>
           <tr>
@@ -40,8 +43,8 @@ const AvailableProducts = (props) => {
         <tbody>
           {products.map((product, index) => {
             return (
-              <tr>
-                <th><img className="image" src={props.url + product.photo_url} alt="no image"></img></th>
+              <tr key= {index}>
+                <th><img className="image" src={props.url + product.photo_url} alt="not available"></img></th>
                 <th>{product.name} </th>
                 <th>{product.price} </th>
               </tr>

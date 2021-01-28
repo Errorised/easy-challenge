@@ -11,33 +11,33 @@ const Categories = (props) => {
   //waiting for fetching data
   const [isLoading, setLoading] = useState(true);
   //getting categories from API
-  const getCategories = async () => {
-    const res = await axios.get("https://api.predic8.de/shop/categories/");
-    const categories = res.data.categories;
-    //removing every element w/o name or number as name
-    const filtered = await categories.filter((element) => {
-      return element.hasOwnProperty("name") && isNaN(element.name);
-    });
-    //creating array of product urls
-    const categorieUrl = filtered.map((element) => {
-      return props.url + element.category_url;
-    });
-    //promise for every url
-    const getproductsByCategorie = await categorieUrl.map((url) => {
-      return axios
-        .get(url)
-        .then((res) => res.data)
-        .catch((err) => console.log(err));
-    });
-
-    //set allCategories in Array of Objects: [...{name: "", products: []}]
-    await axios
-      .all(getproductsByCategorie)
-      .then((res) => setAllCategories(res));
-    setLoading(false);
-  };
 
   useEffect(() => {
+    const getCategories = async () => {
+      const res = await axios.get("https://api.predic8.de/shop/categories/");
+      const categories = res.data.categories;
+      //removing every element w/o name or number as name
+      const filtered = await categories.filter((element) => {
+        return element.hasOwnProperty("name") && isNaN(element.name);
+      });
+      //creating array of product urls
+      const categorieUrl = filtered.map((element) => {
+        return props.url + element.category_url;
+      });
+      //promise for every url
+      const getproductsByCategorie = await categorieUrl.map((url) => {
+        return axios
+          .get(url)
+          .then((res) => res.data)
+          .catch((err) => console.log(err));
+      });
+
+      //set allCategories in Array of Objects: [...{name: "", products: []}]
+      await axios
+        .all(getproductsByCategorie)
+        .then((res) => setAllCategories(res));
+      setLoading(false);
+    };
     getCategories();
   }, []);
   //handle Tabs
@@ -53,9 +53,8 @@ const Categories = (props) => {
       ) : (
         <Appbar position="static">
           <Tabs onChange={handleTabs} value={tabValue}>
-            
-            {allCategories.map((category) => {
-              return <Tab label={category.name}></Tab>;
+            {allCategories.map((category, index) => {
+              return <Tab label={category.name} key={index} ></Tab>;
             })}
             <Tab label="All Products" />
           </Tabs>
