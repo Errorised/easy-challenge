@@ -1,7 +1,21 @@
 import React from "react";
+import _ from "lodash";
 
 const AvailableProductsTable = (props) => {
-  console.log(props.products);
+  const { searchTerm, products, url } = props;
+  //capitize all names for filtering&display
+  const capitalized = products.map((element) => {
+    return {
+      name: _.capitalize(element.name),
+      photo_url: element.photo_url,
+      category_url: element.category_url,
+      price: element.price
+    };
+  });
+  //filter duplicates
+  const filtered = _.uniqBy(capitalized, (element) => element.name)
+  console.log(products)
+
   return (
     <table>
       <thead>
@@ -12,12 +26,12 @@ const AvailableProductsTable = (props) => {
         </tr>
       </thead>
       <tbody>
-        {props.products
+        {filtered
           .filter((value) => {
             if (value === "") {
               return value;
             } else if (
-              value.name.toLowerCase().includes(props.searchTerm.toLowerCase())
+              value.name.toLowerCase().includes(searchTerm.toLowerCase())
             ) {
               return value;
             }
@@ -28,7 +42,7 @@ const AvailableProductsTable = (props) => {
                 <th>
                   <img
                     className="image"
-                    src={props.url + product.photo_url}
+                    src={url + product.photo_url}
                     alt="not available"
                   ></img>
                 </th>

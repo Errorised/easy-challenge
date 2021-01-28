@@ -14,7 +14,7 @@ const AvailableProducts = (props) => {
     const getPriceUrl = await allProducts.map((product) => {
       return props.url + product.product_url;
     });
-
+    //promises for every url
     const getPrice = await getPriceUrl.map((url) => {
       return axios
         .get(url)
@@ -23,12 +23,12 @@ const AvailableProducts = (props) => {
     });
 
     axios.all(getPrice).then((res) => setProducts(res));
+
   };
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
-
   useEffect(() => {
     getProducts();
   }, []);
