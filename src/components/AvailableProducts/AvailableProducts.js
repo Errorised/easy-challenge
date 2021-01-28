@@ -4,7 +4,8 @@ import SearchBar from "./SearchBar";
 
 const AvailableProducts = (props) => {
     const [products, setProducts] = useState([]);
-
+    const [searchTerm, setSearchTerm] = useState("");
+    //get products from API
     const getProducts = async () => {
 
         const res = await axios.get(props.url + "/shop/products/");
@@ -24,6 +25,11 @@ const AvailableProducts = (props) => {
 
         axios.all(getPrice).then(res => setProducts(res));      
     }
+
+    const handleSearch = (event)  => {
+      setSearchTerm(event.target.value);
+    }
+
     useEffect(() => {
         getProducts();
 
@@ -31,7 +37,7 @@ const AvailableProducts = (props) => {
 
     return (
         <div>
-          <SearchBar products={products} />
+          <SearchBar products={products} onSearch={handleSearch} searchTerm={searchTerm} />
       <table>
         <thead>
           <tr>
@@ -41,7 +47,15 @@ const AvailableProducts = (props) => {
           </tr>
         </thead>
         <tbody>
-          {products.map((product, index) => {
+          {products
+          .filter(value => {
+            if(value==="") {
+              return value
+            } else if(value.name.toLowerCase().includes(searchTerm.toLowerCase())) {
+              return value
+            }
+          })
+          .map((product, index) => {
             return (
               <tr key= {index}>
                 <th><img className="image" src={props.url + product.photo_url} alt="not available"></img></th>

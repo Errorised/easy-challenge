@@ -6,7 +6,7 @@ import Tab from "@material-ui/core/Tab";
 import TabContent from "./TabContent";
 import TabAllProducts from "./TabAllProducts";
 
-const Categories = (props) => {
+const CategoriesTable = (props) => {
   const [allCategories, setAllCategories] = useState([]);
   //waiting for fetching data
   const [isLoading, setLoading] = useState(true);
@@ -71,4 +71,4 @@ const Categories = (props) => {
   );
 };
 
-export default Categories;
+export default CategoriesTable;

@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
-import AvailableProducts from "./components/AvailableProducts"
-import Categories from "./components/Categories";
+import AvailableProducts from "./components/AvailableProducts/AvailableProducts"
+import CategoriesTable from "./components/AllProducts/CategoriesTable";
 
 function App() {
 
@@ -12,7 +12,7 @@ function App() {
       <h1>List of available products</h1>
       <AvailableProducts url={apiUrl} />
       <h1>List of all products</h1>
-      <Categories url={apiUrl} />
+      <CategoriesTable url={apiUrl} />
     </div>
   );
 }
