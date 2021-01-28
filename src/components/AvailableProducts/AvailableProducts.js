@@ -1,73 +1,52 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SearchBar from "./SearchBar";
+import AvailableProductsTable from "./AvailableProductsTable";
 
 const AvailableProducts = (props) => {
-    const [products, setProducts] = useState([]);
-    const [searchTerm, setSearchTerm] = useState("");
-    //get products from API
-    const getProducts = async () => {
+  const [products, setProducts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  //get products from API
+  const getProducts = async () => {
+    const res = await axios.get(props.url + "/shop/products/");
+    const allProducts = res.data.products;
 
-        const res = await axios.get(props.url + "/shop/products/");
-        const allProducts = res.data.products;
+    const getPriceUrl = await allProducts.map((product) => {
+      return props.url + product.product_url;
+    });
 
-        const getPriceUrl = await allProducts.map((product) => {
-            return (props.url + product.product_url)
-        })
+    const getPrice = await getPriceUrl.map((url) => {
+      return axios
+        .get(url)
+        .then((res) => res.data)
+        .catch((err) => console.log(err));
+    });
 
-        const getPrice = await getPriceUrl.map((url) => {
+    axios.all(getPrice).then((res) => setProducts(res));
+  };
 
-            return axios
-                .get(url)
-                .then(res => res.data)
-                .catch(err => console.log(err));
-        })
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
 
-        axios.all(getPrice).then(res => setProducts(res));      
-    }
+  useEffect(() => {
+    getProducts();
+  }, []);
 
-    const handleSearch = (event)  => {
-      setSearchTerm(event.target.value);
-    }
-
-    useEffect(() => {
-        getProducts();
-
-    }, []);
-
-    return (
-        <div>
-          <SearchBar products={products} onSearch={handleSearch} searchTerm={searchTerm} />
-      <table>
-        <thead>
-          <tr>
-            <th>Image</th>
-            <th>Product</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          {products
-          .filter(value => {
-            if(value==="") {
-              return value
-            } else if(value.name.toLowerCase().includes(searchTerm.toLowerCase())) {
-              return value
-            }
-          })
-          .map((product, index) => {
-            return (
-              <tr key= {index}>
-                <th><img className="image" src={props.url + product.photo_url} alt="not available"></img></th>
-                <th>{product.name} </th>
-                <th>{product.price} </th>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+  return (
+    <div>
+      <SearchBar
+        products={products}
+        onSearch={handleSearch}
+        searchTerm={searchTerm}
+      />
+      <AvailableProductsTable
+        searchTerm={searchTerm}
+        products={products}
+        url={props.url}
+      />
     </div>
-    )
-}
+  );
+};
 
 export default AvailableProducts;

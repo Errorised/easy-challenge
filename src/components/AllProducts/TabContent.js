@@ -5,7 +5,7 @@ const TabContent = (props) => {
   const data = props.data;
   const value = props.index;
   const TabPanel = (props) => {
-    const { children, value, index, ...other } = props;
+    const { children, value, index } = props;
     return <div>{value === index && children}</div>;
   };
 

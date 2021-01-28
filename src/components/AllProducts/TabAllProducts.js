@@ -19,11 +19,9 @@ const TabAllProducts = (props) => {
     .value();
 
   const TabPanel = (props) => {
-    const { children, value, index, ...other } = props;
+    const { children, value, index } = props;
     return <div>{value === index && children}</div>;
   };
-
-
 
   return (
     <TabPanel value={props.value} index={props.index}>
