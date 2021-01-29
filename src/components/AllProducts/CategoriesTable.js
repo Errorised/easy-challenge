@@ -49,9 +49,10 @@ const CategoriesTable = (props) => {
 
   const useStyles = makeStyles((theme) => ({
     demo2: {
-      backgroundColor: "#2e1534",
+      backgroundColor: "#009879",
       width: "60%",
-      margin: "auto"
+      margin: "auto",
+      color: "white"
     },
     table: {
       width: "60%"
@@ -64,7 +65,7 @@ const CategoriesTable = (props) => {
       {isLoading ? (
         <h1>Loding</h1>
       ) : (
-        <Appbar position="static">
+
           <div className={classes.demo2}>
             <Tabs
               onChange={handleTabs}
@@ -84,7 +85,7 @@ const CategoriesTable = (props) => {
             <TabContent value={tabValue} data={allCategories} index={5} />
             <TabAllProducts value={tabValue} data={allCategories} index={6} />
             </div>
-          </Appbar>
+
 
       )}
     </div>
