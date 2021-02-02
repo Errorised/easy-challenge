@@ -3,14 +3,15 @@ import _ from "lodash";
 import classes from "./TabContent.module.css";
 
 const TabContent = (props) => {
-  const data = props.data;
+  // const data = props.data;
+  const products = props.data;
   const value = props.index;
   const TabPanel = (props) => {
     const { children, value, index } = props;
     return <div>{value === index && children}</div>;
   };
 
-  const products = data[value].products;
+  // const products = data[value].products;
   //Filter results (capitalize, removing most invalid elements)
   const capitalized = products.map((element) =>
     _.startCase(_.toLower(element.name))
@@ -25,7 +26,7 @@ const TabContent = (props) => {
     )
     .value();
   return (
-    <TabPanel value={props.value} index={props.index}>
+    <TabPanel value={props.value} index={value}>
       <div className={classes.tabContent} >
         {filtered.map((element, index) => {
           return <p key={index}>{element}</p>;

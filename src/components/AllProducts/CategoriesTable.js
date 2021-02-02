@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Appbar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import TabContent from "./TabContent";
@@ -52,11 +51,11 @@ const CategoriesTable = (props) => {
       backgroundColor: "#009879",
       width: "60%",
       margin: "auto",
-      color: "white"
+      color: "white",
     },
     table: {
-      width: "60%"
-    }
+      width: "60%",
+    },
   }));
   const classes = useStyles();
 
@@ -65,28 +64,28 @@ const CategoriesTable = (props) => {
       {isLoading ? (
         <h1>Loding</h1>
       ) : (
+        
+        <div className={classes.demo2}>
+          
 
-          <div className={classes.demo2}>
-            <Tabs
-              onChange={handleTabs}
+          <Tabs onChange={handleTabs} value={tabValue} variant="scrollable">
+            {allCategories.map((category, index) => {
+              return <Tab label={category.name} key={index}></Tab>;
+            })}
+            <Tab label="All Products" />
+          </Tabs>
+          {allCategories.map((category, index) => {
+            return (
+              <TabContent
+              key={index}
               value={tabValue}
-              variant="scrollable"
-            >
-              {allCategories.map((category, index) => {
-                return <Tab label={category.name} key={index}></Tab>;
-              })}
-              <Tab label="All Products" />
-            </Tabs>
-            <TabContent value={tabValue} data={allCategories} index={0} />
-            <TabContent value={tabValue} data={allCategories} index={1} />
-            <TabContent value={tabValue} data={allCategories} index={2} />
-            <TabContent value={tabValue} data={allCategories} index={3} />
-            <TabContent value={tabValue} data={allCategories} index={4} />
-            <TabContent value={tabValue} data={allCategories} index={5} />
-            <TabAllProducts value={tabValue} data={allCategories} index={6} />
-            </div>
-
-
+              data={category.products}
+              index={index}
+            />
+            )
+          })}
+          <TabAllProducts value={tabValue} data={allCategories} index={allCategories.length} />
+        </div>
       )}
     </div>
   );
