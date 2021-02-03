@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import SearchBar from "./SearchBar";
 import AvailableProductsTable from "./AvailableProductsTable";
-import classes from "./AvailableProducts.module.css"
+import classes from "./AvailableProducts.module.css";
+import ProductCard from "./ProductCards";
 
 const AvailableProducts = (props) => {
   const [products, setProducts] = useState([]);
@@ -24,7 +25,6 @@ const AvailableProducts = (props) => {
     });
 
     axios.all(getPrice).then((res) => setProducts(res));
-
   };
 
   const handleSearch = (event) => {
@@ -35,11 +35,16 @@ const AvailableProducts = (props) => {
   }, []);
 
   return (
-    <div className={classes.table} >
+    <div className={classes.table}>
       <SearchBar
         products={products}
         onSearch={handleSearch}
         searchTerm={searchTerm}
+      />
+      <ProductCard
+        searchTerm={searchTerm}
+        products={products}
+        url={props.url}
       />
       <AvailableProductsTable
         searchTerm={searchTerm}
