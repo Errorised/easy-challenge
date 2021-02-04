@@ -41,11 +41,11 @@ const AvailableProducts = (props) => {
         onSearch={handleSearch}
         searchTerm={searchTerm}
       />
-      <ProductCard
+      {/* <ProductCard
         searchTerm={searchTerm}
         products={products}
         url={props.url}
-      />
+      /> */}
       <AvailableProductsTable
         searchTerm={searchTerm}
         products={products}

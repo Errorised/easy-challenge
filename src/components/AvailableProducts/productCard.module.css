@@ -8,12 +8,11 @@
 .productCard {
   width: 300px;
   height: 350px;
-  border: 1px solid black;
+  border: 1px solid transparent;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  margin: 15px;
   padding-top: 2%;
   text-align: center;
 }
